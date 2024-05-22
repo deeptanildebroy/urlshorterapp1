@@ -60,6 +60,7 @@ td a:hover {
 }
 
 .add-btn {
+    margin-bottom: 20px;
     padding: 10px 20px;
     background-color: #28a745;
     color: #fff;
