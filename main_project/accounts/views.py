@@ -26,7 +26,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect('dashboard')
+                return redirect('dashboard') # Redirecting to Dashboard after Succesful login
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -35,7 +35,7 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'login_form.html', {'form': form})
 
-def logout_view(request):
-    logout(request)
-    messages.info(request, "You have successfully logged out.")
-    return redirect('login')
+# def logout_view(request):
+#     logout(request)
+#     messages.info(request, "You have successfully logged out.")
+#     return redirect('login') # Redirecting to login 

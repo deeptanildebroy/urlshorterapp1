@@ -4,7 +4,6 @@ from django.contrib import messages
 from .models import URL
 from .forms import URLForm
 
-@login_required
 def home(request):
     if request.method == 'POST':
         form = URLForm(request.POST)

@@ -4,10 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 
 class UserRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2'] #It includes 4 fields
 
     def clean_email(self):
         email = self.cleaned_data.get('email')

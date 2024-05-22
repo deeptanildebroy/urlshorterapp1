@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Short URL</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,11 +73,7 @@
     <div class="form-container">
         <form method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="original_url">Original URL:</label>
-                <input type="url" id="long_url" name="long_url" placeholder="Enter original URL" required>
-                <small class="error-message">{{ form.orginal_url.errors }}</small>
-            </div>
+            {{ form.as_p }}
             <button type="submit" class="btn-submit">Generate Short URL</button>
         </form>
     </div>
