@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .models import URL
 from .forms import URLForm
 
@@ -9,8 +10,9 @@ def home(request):
         form = URLForm(request.POST)
         if form.is_valid():
             url = form.save(commit=False)
-            url.user = request.user
+            url.user = request.user if request.user.is_authenticated else None
             url.save()
+            messages.success(request, 'Short URL created successfully!')
             return redirect('dashboard')
     else:
         form = URLForm()
