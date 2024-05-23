@@ -16,23 +16,28 @@
         <form action="{% url 'logout' %}" method="GET">
             <button type="submit" class="add-btn">Logout</button>
         </form>
+        <form action="{% url 'dashboard' %}" method="GET">
+            <button type="submit" class="add-btn">Refresh</button>
+        </form>
         <table>
             <thead>
                 <tr>
+                    <th>Created At</th>
                     <th>Short URL</th>
                     <th>Original URL</th>
                     <th>Clicks</th>
-                    <th>Created At</th>
+                    <th>Referals</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for url in urls %}
                     <tr>
+                        <td>{{ url.created_at }}</td>
                         <td><a href="{{ url.short_url }}">{{ url.short_url }}</a></td>
                         <td>{{ url.original_url }}</td>
                         <td>{{ url.clicks }}</td>
-                        <td>{{ url.created_at }}</td>
+                        <td>{{ url.referral_sources }}</td>
                         <td>
                             <form action="{% url 'delete_url' url.id %}" method="post">
                                 {% csrf_token %}

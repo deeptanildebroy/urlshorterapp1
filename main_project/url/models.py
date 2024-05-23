@@ -14,6 +14,7 @@ class URL(models.Model):
     def save(self, *args, **kwargs):
         if not self.short_url:
             self.short_url = generate_short_url(self.original_url)
+            #To create more uniqueness
             while URL.objects.filter(short_url=self.short_url).exists():
                 self.short_url = generate_short_url(self.original_url, length=len(self.short_url) + 1)
         super().save(*args, **kwargs)

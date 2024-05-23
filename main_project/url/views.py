@@ -6,7 +6,7 @@ from .forms import URLForm
 
 @login_required
 def home(request):
-    if request.method == 'POST':
+    if request.method == 'POST': 
         form = URLForm(request.POST)
         if form.is_valid():
             url = form.save(commit=False)
@@ -16,12 +16,20 @@ def home(request):
             return redirect('dashboard')
     else:
         form = URLForm()
-    return render(request, 'home.html', {'form': form })
+    return render(request, 'home.html', {'form': form})
 
 def redirect_url(request, short_url):
     
     url = get_object_or_404(URL, short_url=short_url)
     url.clicks += 1
+
+    referral_source = request.META.get('HTTP_REFERER', '')
+    if referral_source:
+        if url.referral_sources:
+            url.referral_sources += f"\n{referral_source}"
+        else:
+            url.referral_sources = referral_source
+            
     url.save()
     return redirect(url.original_url)
 
